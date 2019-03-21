@@ -17,7 +17,7 @@ public class Date {
 	public void setDate(int day, int month, int year) throws DateException {
 		
 		this.day = day;
-		System.out.println("Holaaa");
+		/*System.out.println("Holaaa");*/
 		
 		this.month = month;
 		
@@ -52,25 +52,62 @@ public class Date {
 			
 			throw new DateException("Month "+this.month+ " no es válido. Los meses válidos son de 1-12");
 
-		}else {
-			
-			monthTrue = true;
-			
-			if(day < 1 || day > 31) {
+		}else if(this.day < 1 || this.day > comprobarNumberDaysMonth(month) ) {
+					
+			throw new DateException("Day "+day+ " no es válido para este mes "+ month+ ". Los días válidos dependen del mes");
+					
+		}
 				
-				throw new DateException("Day "+day+ " no es válido. Los días válidos son de 1-31");
 				
-			}else {
+		return dayTrue && monthTrue;
+		
+	}
+	
+	public int comprobarNumberDaysMonth(int month) {
+	
+		System.out.println("A comprobar los días de este mes... "+ month);
+		int numberOfDays = 0 ;
+		
+		switch(month) {
+		
+			case 2:
+				numberOfDays = 28;
+				break;
 				
-				dayTrue = true;
+			case 1:
 				
-			}
+			case 3:
+				
+			case 5:
+				
+			case 7:
+				
+			case 8:
+				
+			case 10:
+				
+			case 12:
+				
+				numberOfDays = 31;
+				break;
+				
+			case 4:
+				
+			case 6:
+				
+			case 9:
+				
+			case 11:
+				
+				numberOfDays = 30;
+				
+				break;
 			
-			
+		
 		}
 		
 		
-		return dayTrue && monthTrue;
+		return numberOfDays;
 		
 	}
 	

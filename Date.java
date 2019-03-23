@@ -60,8 +60,8 @@ public class Date {
 			
 			getMonthName(month);
 			System.out.println(getMonthToEndYear(month));
-			getMonthToEndYear(month);
-			System.out.println("Meses para acabar el año: "+getMonthToEndYear(month));
+			//getMonthToEndYear(month);
+			//System.out.println("Holaaa "+getMonthToEndYear(month).toString());
 			getSeason(month);
 			System.out.println("La estacion es: "+getSeason(month));
 			
@@ -148,6 +148,7 @@ public class Date {
 	public int comprobarNumberDaysMonth(int month) {
 	
 		System.out.println("A comprobar los días de este mes... "+ month);
+		
 		int numberOfDays = 0 ;
 		
 		switch(month) {
@@ -191,9 +192,9 @@ public class Date {
 		
 	}
 	
-	public boolean isSame() {
+	public boolean isSame(Date date1, Date date2) {
 		
-		if((isSameYear() == true) && (isSameMonth() == true) && (isSameDay()==true)) {
+		if((isSameYear(date1.day, date2.day) == true) && (isSameMonth(date1.month, date2.month) == true) && (isSameDay(date1.year, date2.year)==true)) {
 			
 			return true;
 			
@@ -206,10 +207,10 @@ public class Date {
 			
 	}
 	
-	private boolean isSameDay() {
+	private boolean isSameDay(int day, int day2) {
 		// TO DO Auto-generated method stub
 		
-		if(this.day == day) {
+		if(day == day2) {
 			
 			return true;
 			
@@ -220,10 +221,10 @@ public class Date {
 		}
 
 	}	
-	private boolean isSameMonth() {
+	private boolean isSameMonth(int month, int month2) {
 		// TO DO Auto-generated method stub
 		
-		if(this.month == month) {
+		if(month== month2) {
 			
 			return true;
 			
@@ -235,16 +236,16 @@ public class Date {
 		
 	}
 
-	private boolean isSameYear() {
+	private boolean isSameYear(int year,int year2) {
 		// TO DO Auto-generated method stub
 		
-		if(this.year == year) {
+		if(year == year2) {
 			
 			return true;
 			
 		}else {
 		
-		return false;
+			return false;
 	
 		}
 
@@ -252,15 +253,18 @@ public class Date {
 	
 	public String getMonthToEndYear(int month) {
 		
-		String monthToEndTheYear = null;
+		String monthToEndTheYear= " , ";
 		
-		for(int i = month; i < 12; i++) {
+		String nuevaCadena  = getMonthName(month+1);
+		
+		for(int i = month+2; i <= 12; i++) {
 			
-			monthToEndTheYear = getMonthName(month);
+			nuevaCadena = nuevaCadena.concat(monthToEndTheYear.concat(getMonthName(i)));
+			
 
 		}
 		
-		return monthToEndTheYear;
+		return nuevaCadena;
 			
 	}
 	

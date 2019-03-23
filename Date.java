@@ -56,6 +56,15 @@ public class Date {
 					
 			throw new DateException("Day "+day+ " no es válido para este mes "+ month+ ". Los días válidos dependen del mes");
 					
+		}else {
+			
+			getMonthName(month);
+			System.out.println(getMonthToEndYear(month));
+			getMonthToEndYear(month);
+			System.out.println("Meses para acabar el año: "+getMonthToEndYear(month));
+			getSeason(month);
+			System.out.println("La estacion es: "+getSeason(month));
+			
 		}
 				
 				
@@ -63,6 +72,79 @@ public class Date {
 		
 	}
 	
+	public String getMonthName(int month) {
+		// TO DO Auto-generated method stub
+		
+		String monthName = null;
+		
+		switch(month) {
+		
+			case 1:
+			
+				monthName = "Enero";
+				break;
+			
+			case 2:
+			
+				monthName = "Febrero";
+				break;
+			
+			case 3:
+			
+				monthName = "Marzo";
+				break;
+			
+			case 4:
+			
+				monthName = "Abril";
+				break;
+			
+			case 5:
+			
+				monthName = "Mayo";
+				break;
+			
+			case 6:
+			
+				monthName = "Junio";
+				break;
+			
+			case 7:
+			
+				monthName = "Julio";
+				break;
+			
+			case 8:
+			
+				monthName = "Agosto";
+				break;
+				
+			case 9:
+			
+				monthName = "Septiembre";
+				break;
+			
+			case 10:
+			
+				monthName = "Octubre";
+				break;
+			
+			case 11:
+			
+				monthName = "Noviembre";
+				break;
+			
+			case 12:
+		
+				monthName = "Diciembre";
+				break;
+		
+			}	
+		
+		return monthName;
+			
+	}
+
 	public int comprobarNumberDaysMonth(int month) {
 	
 		System.out.println("A comprobar los días de este mes... "+ month);
@@ -101,14 +183,85 @@ public class Date {
 				
 				numberOfDays = 30;
 				
-				break;
-			
+				break;	
 		
 		}
 		
-		
 		return numberOfDays;
 		
+	}
+	
+	public boolean isSame() {
+		
+		if((isSameYear() == true) && (isSameMonth() == true) && (isSameDay()==true)) {
+			
+			return true;
+			
+		}else {
+			
+			return false;
+			
+		}
+		
+			
+	}
+	
+	private boolean isSameDay() {
+		// TO DO Auto-generated method stub
+		
+		if(this.day == day) {
+			
+			return true;
+			
+		}else {
+		
+		return false;
+	
+		}
+
+	}	
+	private boolean isSameMonth() {
+		// TO DO Auto-generated method stub
+		
+		if(this.month == month) {
+			
+			return true;
+			
+		}else {
+		
+			return false;
+		
+		}
+		
+	}
+
+	private boolean isSameYear() {
+		// TO DO Auto-generated method stub
+		
+		if(this.year == year) {
+			
+			return true;
+			
+		}else {
+		
+		return false;
+	
+		}
+
+	}	
+	
+	public String getMonthToEndYear(int month) {
+		
+		String monthToEndTheYear = null;
+		
+		for(int i = month; i < 12; i++) {
+			
+			monthToEndTheYear = getMonthName(month);
+
+		}
+		
+		return monthToEndTheYear;
+			
 	}
 	
 	public String getSeason(int month) {

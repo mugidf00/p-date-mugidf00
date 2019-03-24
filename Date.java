@@ -59,19 +59,115 @@ public class Date {
 		}else {
 			
 			getMonthName(month);
-			System.out.println(getMonthToEndYear(month));
+			System.out.println("Los meses para acabar el año: "+getMonthToEndYear(month));
 			//getMonthToEndYear(month);
 			//System.out.println("Holaaa "+getMonthToEndYear(month).toString());
 			getSeason(month);
 			System.out.println("La estacion es: "+getSeason(month));
+			//getMonthsWithSameNumberOfDays(month);
+			System.out.println(getMonthsWithSameNumberOfDays(month));
 			
+			//System.out.println("Las fechas para acbar el mes son: "+datesUntilEndTheMonth(day, month, year).toString());
+			
+			System.out.println("Las fechas que han pasado desde el primer del año son: "+getDatesSinceFirstDayOfYear(this.day, this.month, this.year));
+		
+			System.out.println("El número de intentos para generar una fecha igual es: "+getNumberOfAttempts());
 		}
 				
 				
 		return dayTrue && monthTrue;
 		
 	}
+	public int getNumberOfAttempts() {
+		// TODO Auto-generated method stub
+		
+		int numberOfAttempts = 0;
+		
+		int day, month, year;
+		
+		
+		do {
+			
+			day = (int) (Math.random() * 31) + 1;
+			
+			month = (int) (Math.random()*31) + 1;
+			
+			year = (int) (Math.random() *31) + 1 ;
+			
+			numberOfAttempts++;
+			
+		}while(day != this.day && month != this.month && year != this.year);
+		
+		
+		return numberOfAttempts;
+	}
+
+	public int getDatesSinceFirstDayOfYear(int day, int month, int year) {
+		// TODO Auto-generated method stub
+		
+		int days = 0;
+		
+		for(int i = 0; i < day; i++ ) {
+			
+			for(int j = 0; j < month; j++) {
+				
+				days++;
+				
+			}
+			
+		}
+		
+		
+		return days;
+	}
+
+	public Date datesUntilEndTheMonth(int day, int month, int year) {
+		
+		Date dateMonth = null;
+		
+		if(day+1<comprobarNumberDaysMonth(month)) {
+		
+		for(int i = day; i<comprobarNumberDaysMonth(month); i++) {
+			
+				try {
+					dateMonth = new Date(i, month, year);
+				} catch (DateException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
+			}
+		
+		}
+		
+		return dateMonth;
 	
+	}
+	public String getMonthsWithSameNumberOfDays(int month) {
+		// TODO Auto-generated method stub
+		String mesesConMismoNumeroDias = " , ";
+		
+		int cont = 1;
+		
+		String nuevaCadena  = "Meses con mismo número de días: ";
+
+			//nuevaCadena = nuevaCadena.concat(monthToEndTheYear.concat(getMonthName(i)));
+			
+		while(cont <= 12) {
+			
+			if(comprobarNumberDaysMonth(month) == comprobarNumberDaysMonth(cont)&&(cont!=month)) {
+					
+					nuevaCadena = nuevaCadena.concat(mesesConMismoNumeroDias).concat(getMonthName(cont));
+					//System.out.println("Holita "+getMonthName(cont).toString());
+							
+			}
+			cont++;
+		}
+			
+		return nuevaCadena;
+		
+	}
+
 	public String getMonthName(int month) {
 		// TO DO Auto-generated method stub
 		
@@ -147,7 +243,7 @@ public class Date {
 
 	public int comprobarNumberDaysMonth(int month) {
 	
-		System.out.println("A comprobar los días de este mes... "+ month);
+		//System.out.println("A comprobar los días de este mes... "+ month);
 		
 		int numberOfDays = 0 ;
 		
@@ -192,9 +288,9 @@ public class Date {
 		
 	}
 	
-	public boolean isSame(Date date1, Date date2) {
+	public boolean isSame(Date other) {
 		
-		if((isSameYear(date1.day, date2.day) == true) && (isSameMonth(date1.month, date2.month) == true) && (isSameDay(date1.year, date2.year)==true)) {
+		if((isSameDay(other.day, this.day) && (isSameMonth(other.month, this.month) == true) && (isSameYear(this.year, other.year)==true))) {
 			
 			return true;
 			
@@ -236,10 +332,10 @@ public class Date {
 		
 	}
 
-	private boolean isSameYear(int year,int year2) {
+	private boolean isSameYear(int year, int year2) {
 		// TO DO Auto-generated method stub
 		
-		if(year == year2) {
+		if(this.year == year2) {
 			
 			return true;
 			
@@ -255,17 +351,24 @@ public class Date {
 		
 		String monthToEndTheYear= " , ";
 		
-		String nuevaCadena  = getMonthName(month+1);
+		if(month != 12 && month+2 < 12) {
 		
-		for(int i = month+2; i <= 12; i++) {
+			String nuevaCadena  = getMonthName(month+1);
+		
+			for(int i = month+2; i <= 12; i++) {
 			
-			nuevaCadena = nuevaCadena.concat(monthToEndTheYear.concat(getMonthName(i)));
-			
-
-		}
+				nuevaCadena = nuevaCadena.concat(monthToEndTheYear.concat(getMonthName(i)));
+		
+			}
 		
 		return nuevaCadena;
+		
+		}	else {
 			
+			return "Diciembre, es el último mes.";
+			
+		}
+		
 	}
 	
 	public String getSeason(int month) {
